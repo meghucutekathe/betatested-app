@@ -1,60 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forever Yours, Meghu ❤️</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
     <div class="app-container">
-      <div class="password-container" id="passwordContainer">
-        <h2>Enter Password to Access Content</h2>
-        <input
-          type="password"
-          id="passwordInput"
-          placeholder="Enter Password"
-          class="password-input"
-        />
-        <button id="passwordSubmit" class="submit-button">Submit</button>
-      </div>
 
-      <div id="mainContent" class="hidden">
-        <h1 id="title">Forever Yours, Meghu ❤️</h1>
-        <div id="messageContainer" class="content-card">
-          <h2>🌸 A Message for You 🌸</h2>
-          <button id="messageButton" class="open-message-button">Open Message</button>
-          <div id="message" class="hidden">
-            <p>
-              I’m waiting for you every second, counting days, missing you deeply.
-              No matter how long, I’ll always wait.
-            </p>
-          </div>
+        <!-- Password Input Section -->
+        <div class="password-container" id="passwordContainer">
+            <h2>Enter Password to Access Content</h2>
+            <input type="password" id="passwordInput" placeholder="Enter Password" class="password-input">
+            <button id="passwordSubmit" class="submit-button">Submit</button>
         </div>
 
-        <div id="songContainer" class="content-card">
-          <h2>🎶 LAST SONG YOU SANG FOR ME 🎶</h2>
-          <audio controls>
-            <source src="https://files.catbox.moe/hbykg5.mp3" type="audio/mp3" />
-            Your browser does not support the audio element.
-          </audio>
-          <p id="songLyric">Line 1 of Husn lyrics...</p>
+        <!-- Video Section (Initially Hidden) -->
+        <div id="videoContainer" class="hidden">
+            <video id="introVideo" width="100%" height="auto" playsinline>
+                <source src="https://files.catbox.moe/zvy1rv.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p id="tapToPlay" class="hidden">Tap the video to play</p>
         </div>
 
-        <div id="giftContainer" class="content-card">
-          <h2>🎁 Mystery Gift 🎁</h2>
-          <p id="countdown">Unlocks in: 30d 14h 25m 12s</p>
-          <button id="giftButton" class="check-gift-button">Check Gift</button>
-          <div id="giftMessage" class="hidden">
-            <p>
-              My Dearest Meghu, Happy Birthday, my love! Today marks the day the world was blessed with your presence, and I am beyond grateful for it. Thank you for waiting, for believing in us, and for making every moment we’ve shared together unforgettable. You are the light in my life, the reason behind my happiness, and the warmth in my heart.
-            </p>
-          </div>
+        <!-- Main App Content -->
+        <div id="mainContent" class="hidden">
+            <h1 id="title">Forever Yours, Meghu ❤️</h1>
+            
+            <div id="messageContainer" class="content-card">
+                <h2>🌸 A Message for You 🌸</h2>
+                <button id="messageButton" class="open-message-button">Open Message</button>
+                <div id="message" class="hidden"></div>
+            </div>
+
+            <div id="songContainer" class="content-card">
+                <h2>🎶 LAST SONG YOU SANG FOR ME 🎶</h2>
+                <audio controls>
+                    <source src="https://files.catbox.moe/hbykg5.mp3" type="audio/mp3" />
+                    Your browser does not support the audio element.
+                </audio>
+                <p id="songLyric">Line 1 of Husn lyrics...</p>
+            </div>
+
+            <div id="giftContainer" class="content-card">
+                <h2>🎁 Mystery Gift 🎁</h2>
+                <p id="countdown">Unlocks in: calculating...</p>
+                <button id="giftButton" class="check-gift-button">Check Gift</button>
+                <div id="giftMessage" class="hidden"></div>
+            </div>
         </div>
-      </div>
 
     </div>
 
     <script src="script.js"></script>
-  </body>
+</body>
 </html>
