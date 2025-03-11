@@ -12,6 +12,30 @@ const giftButton = document.getElementById('giftButton');
 const giftMessage = document.getElementById('giftMessage');
 const countdown = document.getElementById('countdown');
 
+// Create a container for the Catbox video
+const catboxContainer = document.createElement('div');
+catboxContainer.style.display = 'flex';
+catboxContainer.style.justifyContent = 'center';
+catboxContainer.style.alignItems = 'center';
+catboxContainer.style.marginTop = '20px';
+catboxContainer.style.width = '100%';
+
+// Create the Catbox video element
+const catboxVideo = document.createElement('video');
+catboxVideo.src = 'https://files.catbox.moe/m5hznh.mp4';
+catboxVideo.controls = true;
+catboxVideo.classList.add('hidden'); // Hide initially
+
+// Set size while keeping the aspect ratio
+catboxVideo.style.width = '80%'; // Adjust size
+catboxVideo.style.maxWidth = '500px'; // Ensures it doesn’t get too big
+catboxVideo.style.borderRadius = '10px';
+catboxVideo.style.boxShadow = '0px 4px 10px rgba(0, 0, 0, 0.2)';
+
+// Append video to container, then container to main content
+catboxContainer.appendChild(catboxVideo);
+document.body.appendChild(catboxContainer);
+
 // Password input event
 passwordSubmit.addEventListener('click', () => {
     const password = passwordInput.value;
@@ -35,10 +59,14 @@ passwordSubmit.addEventListener('click', () => {
             tapToPlay.classList.add('hidden');
         });
 
-        // Hide video and show main content instantly when video ends
+        // When intro video ends, show main content & autoplay Catbox video
         introVideo.addEventListener('ended', () => {
             videoContainer.classList.add('hidden');
             mainContent.classList.remove('hidden');
+
+            // Show and autoplay Catbox video
+            catboxVideo.classList.remove('hidden');
+            catboxVideo.play();
         });
     } else {
         alert('Incorrect password!');
@@ -47,7 +75,7 @@ passwordSubmit.addEventListener('click', () => {
 
 // Special Message
 messageButton.addEventListener('click', () => {
-    message.innerHTML = `<p>I’m waiting for you every second, counting the days, missing you deeply. I truly believe in you and trust that you would never leave. I don’t know the date when you’ll text me again, but I know every struggle you’ve been through. Even now, I know that if you wanted to speak to me, you couldn’t. But I’m here, waiting for you and for your exams to be over, so we can finally be together like before.</p>`;
+    message.innerHTML = <p>I’m waiting for you every second, counting the days, missing you deeply. I truly believe in you and trust that you would never leave. I don’t know the date when you’ll text me again, but I know every struggle you’ve been through. Even now, I know that if you wanted to speak to me, you couldn’t. But I’m here, waiting for you and for your exams to be over, so we can finally be together like before.ALL THE BEST FOR EXAMS KATHE💓.</p>;
     message.classList.remove('hidden');
 });
 
@@ -64,13 +92,51 @@ function updateCountdown() {
         const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
         const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        countdown.textContent = `Unlocks in: ${days}d ${hours}h ${minutes}m`;
+        countdown.textContent = Unlocks in: ${days}d ${hours}h ${minutes}m;
     }
 }
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// Gift Button (Unlocks on July 27, 2025, at 12:00 AM)
+// Google Search-Based Q&A (Replacing AI Model)
+const questionInput = document.getElementById('questionInput');
+const askButton = document.getElementById('askButton');
+const answerOutput = document.getElementById('answerOutput');
+
+// Replace these with your actual Google API Key and Search Engine ID
+const API_KEY = "AIzaSyC9z0jcPk9pkdLb5wd2UinbGAXochZZBz4";  
+const SEARCH_ENGINE_ID = "6543017f003c5482b";  
+
+askButton.addEventListener('click', async () => {
+    const question = questionInput.value.trim();
+    
+    if (question === "") {
+        answerOutput.innerHTML = "<p>Please enter a question!</p>";
+        answerOutput.classList.remove("hidden");
+        return;
+    }
+
+    const searchURL = https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(question)}&key=${API_KEY}&cx=${SEARCH_ENGINE_ID};
+
+    try {
+        const response = await fetch(searchURL);
+        const data = await response.json();
+
+        if (data.items) {
+            answerOutput.innerHTML = <p><strong>Top Results:</strong></p> +
+                data.items.map(item => <p><a href="${item.link}" target="_blank">${item.title}</a></p>).join("");
+        } else {
+            answerOutput.innerHTML = "<p>No relevant results found.</p>";
+        }
+
+        answerOutput.classList.remove("hidden");
+    } catch (error) {
+        answerOutput.innerHTML = "<p>⚠️ Error fetching results. Try again later.</p>";
+        answerOutput.classList.remove("hidden");
+    }
+});
+
+// Mystery Gift Button
 giftButton.addEventListener('click', () => {
     const now = new Date();
     const unlockTime = new Date('2025-07-27T00:00:00');
@@ -80,15 +146,9 @@ giftButton.addEventListener('click', () => {
             <p><strong>My Dearest Meghu,</strong></p>
             <p>Happy Birthday, my love! Today, the world was blessed with you, and I am beyond grateful. Thank you for waiting, for believing in us, and for making every moment we’ve shared unforgettable. You are the light in my life, the reason behind my happiness, and the warmth in my heart.</p>
             
-            <p>When I first saw you, you were just a normal girl to my eyes, but as you came closer, the real you—a loving, mature, and strong woman—shone through. I realized then that you were much more than I could have ever imagined. Your kindness and grace continue to amaze me every day.</p>
-            
             <p>I still remember those beautiful days, how I made kites for you, how we played the frog game, running around like kids, and our endless hide and seek. Those moments, so simple yet precious, are etched in my heart forever. And then, just when I thought life had moved on, you came back into my world like a missing piece finally returning home.</p>
             
-            <p>Meghu, you are more than beautiful. You have a heart full of love and kindness that makes everything brighter. You’ve shown me the true meaning of love, and I am so fortunate to call you mine. The way you understand me, lift me up, and make even the hardest days feel lighter means everything to me.</p>
-            
             <p>I dream of a future where every day is spent with you by my side, taking care of you, supporting you, and cherishing you. You are my safe place, my everything, and I will always choose you, no matter what. I promise to love you with all that I am, today and forever.</p>
-            
-            <p>On this special day, I wish you a year filled with joy, laughter, and love, just as you bring into my life. You are my greatest blessing, Meghu, and I will love you beyond words.</p>
             
             <p><strong>Happy Birthday, my love.</strong></p>
             <p>With all my heart,</p>
