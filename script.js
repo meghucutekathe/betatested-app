@@ -32,9 +32,9 @@ catboxVideo.style.maxWidth = '500px'; // Ensures it doesn’t get too big
 catboxVideo.style.borderRadius = '10px';
 catboxVideo.style.boxShadow = '0px 4px 10px rgba(0, 0, 0, 0.2)';
 
-// Append video to container, then container to main content
+// Append video to container, then place it inside mainContent
 catboxContainer.appendChild(catboxVideo);
-document.body.appendChild(catboxContainer);
+mainContent.appendChild(catboxContainer); // ✅ Catbox video below main content
 
 // Password input event
 passwordSubmit.addEventListener('click', () => {
@@ -66,7 +66,10 @@ passwordSubmit.addEventListener('click', () => {
 
             // Show and autoplay Catbox video
             catboxVideo.classList.remove('hidden');
-            catboxVideo.play();
+            catboxVideo.muted = true; // ✅ Ensure autoplay works
+            catboxVideo.play().catch(() => {
+                console.log("Autoplay failed, user interaction needed.");
+            });
         });
     } else {
         alert('Incorrect password!');
@@ -75,7 +78,7 @@ passwordSubmit.addEventListener('click', () => {
 
 // Special Message
 messageButton.addEventListener('click', () => {
-    message.innerHTML = `<p>I’m waiting for you every second, counting the days, missing you deeply. I truly believe in you and trust that you would never leave. I don’t know the date when you’ll text me again, but I know every struggle you’ve been through. Even now, I know that if you wanted to speak to me, you couldn’t. But I’m here, waiting for you and for your exams to be over, so we can finally be together like before.ALL THE BEST FOR EXAMS KATHE💓.</p>`;
+    message.innerHTML = `<p>I’m waiting for you every second, counting the days, missing you deeply. I truly believe in you and trust that you would never leave. I don’t know the date when you’ll text me again, but I know every struggle you’ve been through. Even now, I know that if you wanted to speak to me, you couldn’t. But I’m here, waiting for you and for your exams to be over, so we can finally be together like before. ALL THE BEST FOR EXAMS KATHE💓.</p>`;
     message.classList.remove('hidden');
 });
 
@@ -98,48 +101,10 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// Google Search-Based Q&A (Replacing AI Model)
-const questionInput = document.getElementById('questionInput');
-const askButton = document.getElementById('askButton');
-const answerOutput = document.getElementById('answerOutput');
-
-// Replace these with your actual Google API Key and Search Engine ID
-const API_KEY = "AIzaSyC9z0jcPk9pkdLb5wd2UinbGAXochZZBz4";  
-const SEARCH_ENGINE_ID = "6543017f003c5482b";  
-
-askButton.addEventListener('click', async () => {
-    const question = questionInput.value.trim();
-    
-    if (question === "") {
-        answerOutput.innerHTML = "<p>Please enter a question!</p>";
-        answerOutput.classList.remove("hidden");
-        return;
-    }
-
-    const searchURL = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(question)}&key=${API_KEY}&cx=${SEARCH_ENGINE_ID}`;
-
-    try {
-        const response = await fetch(searchURL);
-        const data = await response.json();
-
-        if (data.items) {
-            answerOutput.innerHTML = `<p><strong>Top Results:</strong></p>` +
-                data.items.map(item => `<p><a href="${item.link}" target="_blank">${item.title}</a></p>`).join("");
-        } else {
-            answerOutput.innerHTML = "<p>No relevant results found.</p>";
-        }
-
-        answerOutput.classList.remove("hidden");
-    } catch (error) {
-        answerOutput.innerHTML = "<p>⚠️ Error fetching results. Try again later.</p>";
-        answerOutput.classList.remove("hidden");
-    }
-});
-
-// Mystery Gift Button
+// Mystery Gift Button (Unlocks on July 27, 2025, at 12:00 AM)
 giftButton.addEventListener('click', () => {
     const now = new Date();
-    const unlockTime = new Date('2025-07-27T00:00:00');
+    const unlockTime = new Date('2025-07-27T00:00:00'); // ✅ Set to exact 27th July
 
     if (now >= unlockTime) {
         giftMessage.innerHTML = `
@@ -158,5 +123,39 @@ giftButton.addEventListener('click', () => {
         giftButton.disabled = true;
     } else {
         alert("The gift is locked until July 27, 2025!");
+    }
+});
+
+// Google Search-Based Q&A (Restored)
+const questionInput = document.getElementById('questionInput');
+const askButton = document.getElementById('askButton');
+const answerOutput = document.getElementById('answerOutput');
+
+askButton.addEventListener('click', async () => {
+    const question = questionInput.value.trim();
+    
+    if (question === "") {
+        answerOutput.innerHTML = "<p>Please enter a question!</p>";
+        answerOutput.classList.remove("hidden");
+        return;
+    }
+
+    const searchURL = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(question)}&key=AIzaSyC9z0jcPk9pkdLb5wd2UinbGAXochZZBz4&cx=6543017f003c5482b`;
+
+    try {
+        const response = await fetch(searchURL);
+        const data = await response.json();
+
+        if (data.items) {
+            answerOutput.innerHTML = `<p><strong>Top Results:</strong></p>` +
+                data.items.map(item => `<p><a href="${item.link}" target="_blank">${item.title}</a></p>`).join("");
+        } else {
+            answerOutput.innerHTML = "<p>No relevant results found.</p>";
+        }
+
+        answerOutput.classList.remove("hidden");
+    } catch (error) {
+        answerOutput.innerHTML = "<p>⚠️ Error fetching results. Try again later.</p>";
+        answerOutput.classList.remove("hidden");
     }
 });
