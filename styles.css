@@ -101,3 +101,31 @@ button:hover {
 .ask-button:hover {
     background-color: #357AE8;
 }
+
+/* Tic Tac Toe Styles */
+#ticTacToeBoard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.ticTacToeCell {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    border: 1px solid #333;
+    cursor: pointer;
+}
+
+.ticTacToeCell.x {
+    color: #ff8da4;
+}
+
+.ticTacToeCell.o {
+    color: #4285F4;
+}
