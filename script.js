@@ -27,7 +27,8 @@ catboxContainer.style.width = '100%';
 // Create the Catbox video element
 const catboxVideo = document.createElement('video');
 catboxVideo.src = 'https://files.catbox.moe/m5hznh.mp4';
-catboxVideo.controls = true;
+catboxVideo.autoplay = true;
+catboxVideo.volume = 0.3; // Set volume to 30%
 catboxVideo.classList.add('hidden'); // Hide initially
 
 // Set size while keeping the aspect ratio
@@ -70,7 +71,6 @@ passwordSubmit.addEventListener('click', () => {
 
             // Show and autoplay Catbox video
             catboxVideo.classList.remove('hidden');
-            catboxVideo.muted = true; // ✅ Ensure autoplay works
             catboxVideo.play().catch(() => {
                 console.log("Autoplay failed, user interaction needed.");
             });
