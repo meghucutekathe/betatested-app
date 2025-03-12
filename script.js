@@ -85,7 +85,7 @@ passwordSubmit.addEventListener('click', () => {
 
 // Special Message
 messageButton.addEventListener('click', () => {
-    message.innerHTML = `<p>I’m waiting for you every second, counting the days, missing you deeply. I truly believe in you and trust that you would never leave. I don’t know the date when you’ll text me again, but I know every struggle you’ve been through. Even now, I know that if you wanted to speak to me, you couldn’t. But I’m here, waiting for you and for your exams to be over, so we can finally be together like before. ---ALL THE BEST FOR EXAMS MUDDU KATHE 💓---`;
+    message.innerHTML = `<p>I’m waiting for you every second, counting the days, missing you deeply.You are the one who made me beileve in love again . I truly believe in you and trust that you would never leave. I don’t know the date when you’ll text me again, but I know every struggle you’ve been through. Even now, I know that if you wanted to speak to me, you couldn’t. But I’m here, waiting for you and for your exams to be over, so we can finally be together like before. ---ALL THE BEST FOR EXAMS MUDDU KATHE 💓---`;
     message.classList.remove('hidden');
 });
 
