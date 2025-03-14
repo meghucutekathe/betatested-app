@@ -8,14 +8,14 @@
 </head>
 <body>
     <div class="app-container">
-
+    
         <!-- Password Input Section -->
         <div class="password-container content-card" id="passwordContainer">
             <h2>Enter Password to Access Content</h2>
             <input type="password" id="passwordInput" placeholder="Enter Password" class="password-input">
             <button id="passwordSubmit" class="submit-button">Submit</button>
         </div>
-
+    
         <!-- Video Section (Initially Hidden) -->
         <div id="videoContainer" class="hidden content-card">
             <video id="introVideo" width="100%" height="auto" playsinline>
@@ -24,7 +24,7 @@
             </video>
             <p id="tapToPlay" class="hidden">Tap the video to play</p>
         </div>
-
+    
         <!-- Main App Content -->
         <div id="mainContent" class="hidden">
             <h1 id="title">Forever Yours, Meghu ❤️</h1>
@@ -34,7 +34,7 @@
                 <button id="messageButton" class="open-message-button">Open Message</button>
                 <div id="message" class="hidden"></div>
             </div>
-
+    
             <div id="songContainer" class="content-card">
                 <h2>🎶 LAST SONG YOU SANG FOR ME 🎶</h2>
                 <audio controls>
@@ -43,31 +43,38 @@
                 </audio>
                 <p id="songLyric">Line 1 of Husn lyrics...</p>
             </div>
-
+    
             <div id="giftContainer" class="content-card">
                 <h2>🎁 Mystery Gift 🎁</h2>
                 <p id="countdown">Unlocks in: calculating...</p>
                 <button id="giftButton" class="check-gift-button">Check Gift</button>
                 <div id="giftMessage" class="hidden"></div>
             </div>
-
+    
             <div id="questionContainer" class="content-card">
                 <h2>❓ Ask a NEET/CET Question ❓</h2>
                 <input type="text" id="questionInput" placeholder="Enter your question..." class="question-input">
                 <button id="askButton" class="ask-button">Ask</button>
                 <div id="answerOutput" class="hidden"></div>
             </div>
-
+    
             <!-- Tic Tac Toe Game -->
             <div id="ticTacToeContainer" class="content-card hidden">
                 <h2>Are you Bored Meghu?</h2>
                 <div id="ticTacToeBoard"></div>
             </div>
-
+    
+            <!-- Meme Generator -->
+            <div id="memeGeneratorContainer" class="content-card">
+                <h2>meghu the memer</h2>
+                <button id="generateMemeButton" class="generate-meme-button">generate</button>
+                <div id="memeOutput" class="meme-output"></div>
+            </div>
+    
         </div>
-
+    
     </div>
-
+    
     <script src="script.js"></script>
 </body>
 </html>
