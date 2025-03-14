@@ -14,6 +14,7 @@ const countdown = document.getElementById('countdown');
 const ticTacToeContainer = document.getElementById('ticTacToeContainer');
 const questionInput = document.getElementById('questionInput');
 const askButton = document.getElementById('askButton');
+const answerOutput = document.getElementById('answerOutput'); // Added this line
 
 // Create a container for the Catbox video
 const catboxContainer = document.createElement('div');
@@ -85,7 +86,7 @@ passwordSubmit.addEventListener('click', () => {
 
 // Special Message
 messageButton.addEventListener('click', () => {
-    message.innerHTML = `<p>I’m waiting for you every second, counting the days, missing you deeply.You are the one who made me beileve in love again . I truly believe in you and trust that you would never leave. I don’t know the date when you’ll text me again, but I know every struggle you’ve been through. Even now, I know that if you wanted to speak to me, you couldn’t. But I’m here, waiting for you and for your exams to be over, so we can finally be together like before. ---ALL THE BEST FOR EXAMS MUDDU KATHE 💓---`;
+    message.innerHTML = `<p>I’m waiting for you every second, counting the days, missing you deeply.You are the one who made me beileve in love again . I truly believe in you and trust that you would never leave. I don’t know the date when you’ll text me again, but I know every struggle you’ve been through. Even now, I know that if you wanted to speak to me, you couldn’t. But I’m here, waiting for you and for your exams to be over, so we can finally be together like before. ---ALL THE BEST FOR EXAMS MUDDU KATHE 💓---.</p>`;
     message.classList.remove('hidden');
 });
 
@@ -115,13 +116,15 @@ giftButton.addEventListener('click', () => {
 
     if (now >= unlockTime) {
         giftMessage.innerHTML = `
-            <p><strong>My Dearest Meghu,</strong></p>
-            <p>Happy Birthday, my love! Today, the world was blessed with you, and I am beyond grateful. Thank you for waiting, for believing in us, and for making every moment we’ve shared unforgettable. Your patience and love have been my guiding light, and I am so thankful for you.</p>
-            <p>From the very first moment I saw you, I knew you were special. Your kindness, strength, and beauty have only grown more radiant with time. You are not just my partner but my best friend, my confidant, and my greatest support. I cherish every memory we’ve created together, from our playful adventures to our quiet, tender moments.</p>
-            <p>As you celebrate this beautiful day, know that my heart is with you, filled with love and admiration. I dream of a future where we continue to grow together, where every day is a new opportunity to love and support each other. You are my everything, Meghu, and I am so proud of the person you are.</p>
-            <p>On your special day, I wish you all the happiness in the world. May your year be filled with joy, laughter, and endless love. You deserve nothing but the best, and I promise to always stand by your side, to love you, and to cherish you for all eternity.</p>
+             <p><strong>My Dearest Meghu,</strong></p>
+            <p>Happy Birthday, my love! Today, the world was blessed with you, and I am beyond grateful. Thank you for waiting, for believing in us, and for making every moment we’ve shared unforgettable. You are the light in my life, the reason behind my happiness, and the warmth in my heart.</p>
+            <p>When I first saw you, you were just a normal girl to my eyes, but as you came closer, the real you—a loving, mature, and strong woman—shone through. I realized then that you were much more than I could have ever imagined. Your kindness and grace continue to amaze me every day.</p>
+            <p>I still remember those beautiful days, how I made kites for you, how we played the frog game, running around like kids, and our endless hide and seek. Those moments, so simple yet precious, are etched in my heart forever. And then, just when I thought life had moved on, you came back into my world like a missing piece finally returning home.</p>
+            <p>Meghu, you are more than beautiful. You have a heart full of love and kindness that makes everything brighter. You’ve shown me the true meaning of love, and I am so fortunate to call you mine. The way you understand me, lift me up, and make even the hardest days feel lighter means everything to me.</p>
+            <p>I dream of a future where every day is spent with you by my side, taking care of you, supporting you, and cherishing you. You are my safe place, my everything, and I will always choose you, no matter what. I promise to love you with all that I am, today and forever.</p>
+            <p>On this special day, I wish you a year filled with joy, laughter, and love, just as you bring into my life. You are my greatest blessing, Meghu, and I will love you beyond words.</p>
             <p><strong>Happy Birthday, my love.</strong></p>
-            <p>With all my love,</p>
+            <p>With all my heart,</p>
             <p><strong>Your Puttu ❤️</strong></p>
         `;
         giftMessage.classList.remove('hidden');
