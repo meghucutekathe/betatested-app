@@ -14,7 +14,11 @@ const countdown = document.getElementById('countdown');
 const ticTacToeContainer = document.getElementById('ticTacToeContainer');
 const questionInput = document.getElementById('questionInput');
 const askButton = document.getElementById('askButton');
-const answerOutput = document.getElementById('answerOutput'); // Added this line
+const answerOutput = document.getElementById('answerOutput');
+const musicSearchInput = document.getElementById('musicSearchInput');
+const musicSearchButton = document.getElementById('musicSearchButton');
+const musicResults = document.getElementById('musicResults');
+const musicPlayer = document.getElementById('musicPlayer');
 
 // Create a container for the Catbox video
 const catboxContainer = document.createElement('div');
@@ -27,19 +31,19 @@ catboxContainer.style.width = '100%';
 // Create the Catbox video element
 const catboxVideo = document.createElement('video');
 catboxVideo.src = 'https://files.catbox.moe/m5hznh.mp4';
-catboxVideo.controls = true; // Add this line to enable controls
-catboxVideo.volume = 0.3; // Set volume to 30%
-catboxVideo.classList.add('hidden'); // Hide initially
+catboxVideo.controls = true;
+catboxVideo.volume = 0.3;
+catboxVideo.classList.add('hidden');
 
 // Set size while keeping the aspect ratio
-catboxVideo.style.width = '80%'; // Adjust size
-catboxVideo.style.maxWidth = '500px'; // Ensures it doesn’t get too big
+catboxVideo.style.width = '80%';
+catboxVideo.style.maxWidth = '500px';
 catboxVideo.style.borderRadius = '10px';
 catboxVideo.style.boxShadow = '0px 4px 10px rgba(0, 0, 0, 0.2)';
 
 // Append video to container, then place it inside mainContent
 catboxContainer.appendChild(catboxVideo);
-mainContent.appendChild(catboxContainer); // ✅ Catbox video below main content
+mainContent.appendChild(catboxContainer);
 
 // Password input event
 passwordSubmit.addEventListener('click', () => {
@@ -112,11 +116,11 @@ updateCountdown();
 // Mystery Gift Button (Unlocks on July 27, 2025, at 12:00 AM)
 giftButton.addEventListener('click', () => {
     const now = new Date();
-    const unlockTime = new Date('2025-07-27T00:00:00'); // ✅ Set to exact 27th July
+    const unlockTime = new Date('2025-07-27T00:00:00');
 
     if (now >= unlockTime) {
         giftMessage.innerHTML = `
-             <p><strong>My Dearest Meghu,</strong></p>
+              <p><strong>My Dearest Meghu,</strong></p>
             <p>Happy Birthday, my love! Today, the world was blessed with you, and I am beyond grateful. Thank you for waiting, for believing in us, and for making every moment we’ve shared unforgettable. You are the light in my life, the reason behind my happiness, and the warmth in my heart.</p>
             <p>When I first saw you, you were just a normal girl to my eyes, but as you came closer, the real you—a loving, mature, and strong woman—shone through. I realized then that you were much more than I could have ever imagined. Your kindness and grace continue to amaze me every day.</p>
             <p>I still remember those beautiful days, how I made kites for you, how we played the frog game, running around like kids, and our endless hide and seek. Those moments, so simple yet precious, are etched in my heart forever. And then, just when I thought life had moved on, you came back into my world like a missing piece finally returning home.</p>
@@ -331,3 +335,34 @@ function generateMeme() {
             console.error('Error fetching meme:', error);
         });
 }
+
+// YouTube Music Search and Player
+musicSearchButton.addEventListener('click', async () => {
+    const query = musicSearchInput.value.trim();
+
+    if (query === "") {
+        musicResults.innerHTML = "<p>Please enter a song name!</p>";
+        musicResults.classList.remove("hidden");
+        return;
+    }
+
+    const searchURL = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${encodeURIComponent(query)}&key=AIzaSyDjLI_QP8KVdPdtp4m_-KpWFwLAFNaKRx8`;
+
+    try {
+        const response = await fetch(searchURL);
+        const data = await response.json();
+
+        if (data.items.length > 0) {
+            const videoId = data.items[0].id.videoId;
+            musicPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            musicPlayer.classList.remove("hidden");
+            musicResults.classList.add("hidden");
+        } else {
+            musicResults.innerHTML = "<p>No results found.</p>";
+            musicResults.classList.remove("hidden");
+        }
+    } catch (error) {
+        musicResults.innerHTML = "<p>⚠️ Error fetching results. Try again later.</p>";
+        musicResults.classList.remove("hidden");
+    }
+});
