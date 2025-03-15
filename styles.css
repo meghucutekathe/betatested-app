@@ -139,3 +139,22 @@ button:hover {
 .ticTacToeCell.o {
     color: #4285F4;
 }
+
+/* Meme Output */
+.meme-output img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Meme Generator Container */
+#memeGeneratorContainer {
+    max-width: 100%;
+    overflow: hidden;
+    border: 2px solid #333;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    box-sizing: border-box;
+}
