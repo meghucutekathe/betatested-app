@@ -145,7 +145,7 @@ askButton.addEventListener('click', async () => {
     }
 
     const searchURL = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(question)}&key=AIzaSyC9z0jcPk9pkdLb5wd2UinbGAXochZZBz4&cx=6543017f003c5482b`;
-
+    
     try {
         const response = await fetch(searchURL);
         const data = await response.json();
@@ -316,13 +316,15 @@ function initTicTacToe() {
 document.getElementById('generateMemeButton').addEventListener('click', generateMeme);
 
 function generateMeme() {
-    fetch('https://meme-api.com/gimme')
+    fetch('https://api.imgflip.com/get_memes')
         .then(response => response.json())
         .then(data => {
+            const memes = data.data.memes;
+            const randomMeme = memes[Math.floor(Math.random() * memes.length)];
             const memeOutput = document.getElementById('memeOutput');
             memeOutput.innerHTML = `
-                <h3>${data.title}</h3>
-                <img src="${data.url}" alt="${data.title}" />
+                <h3>${randomMeme.name}</h3>
+                <img src="${randomMeme.url}" alt="${randomMeme.name}" />
             `;
         })
         .catch(error => {
