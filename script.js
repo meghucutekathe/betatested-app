@@ -116,7 +116,7 @@ giftButton.addEventListener('click', () => {
 
     if (now >= unlockTime) {
         giftMessage.innerHTML = `
-            <p><strong>My Dearest Meghu,</strong></p>
+             <p><strong>My Dearest Meghu,</strong></p>
             <p>Happy Birthday, my love! Today, the world was blessed with you, and I am beyond grateful. Thank you for waiting, for believing in us, and for making every moment we’ve shared unforgettable. You are the light in my life, the reason behind my happiness, and the warmth in my heart.</p>
             <p>When I first saw you, you were just a normal girl to my eyes, but as you came closer, the real you—a loving, mature, and strong woman—shone through. I realized then that you were much more than I could have ever imagined. Your kindness and grace continue to amaze me every day.</p>
             <p>I still remember those beautiful days, how I made kites for you, how we played the frog game, running around like kids, and our endless hide and seek. Those moments, so simple yet precious, are etched in my heart forever. And then, just when I thought life had moved on, you came back into my world like a missing piece finally returning home.</p>
@@ -316,13 +316,15 @@ function initTicTacToe() {
 document.getElementById('generateMemeButton').addEventListener('click', generateMeme);
 
 function generateMeme() {
-    fetch('https://meme-api.com/gimme')
+    fetch('https://api.imgflip.com/get_memes')
         .then(response => response.json())
         .then(data => {
+            const memes = data.data.memes;
+            const randomMeme = memes[Math.floor(Math.random() * memes.length)];
             const memeOutput = document.getElementById('memeOutput');
             memeOutput.innerHTML = `
-                <h3>${data.title}</h3>
-                <img src="${data.url}" alt="${data.title}" />
+                <h3>${randomMeme.name}</h3>
+                <img src="${randomMeme.url}" alt="${randomMeme.name}" />
             `;
         })
         .catch(error => {
