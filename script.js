@@ -145,7 +145,7 @@ askButton.addEventListener('click', async () => {
     }
 
     const searchURL = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(question)}&key=AIzaSyC9z0jcPk9pkdLb5wd2UinbGAXochZZBz4&cx=6543017f003c5482b`;
-    
+
     try {
         const response = await fetch(searchURL);
         const data = await response.json();
