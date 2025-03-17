@@ -22,11 +22,7 @@ const musicPlayer = document.getElementById('musicPlayer');
 
 // Create a container for the Catbox video
 const catboxContainer = document.createElement('div');
-catboxContainer.style.display = 'flex';
-catboxContainer.style.justifyContent = 'center';
-catboxContainer.style.alignItems = 'center';
-catboxContainer.style.marginTop = '20px';
-catboxContainer.style.width = '100%';
+catboxContainer.className = 'video-container';
 
 // Create the Catbox video element
 const catboxVideo = document.createElement('video');
@@ -34,12 +30,6 @@ catboxVideo.src = 'https://files.catbox.moe/m5hznh.mp4';
 catboxVideo.controls = true;
 catboxVideo.volume = 0.3;
 catboxVideo.classList.add('hidden');
-
-// Set size while keeping the aspect ratio
-catboxVideo.style.width = '80%';
-catboxVideo.style.maxWidth = '500px';
-catboxVideo.style.borderRadius = '10px';
-catboxVideo.style.boxShadow = '0px 4px 10px rgba(0, 0, 0, 0.2)';
 
 // Append video to container, then place it inside mainContent
 catboxContainer.appendChild(catboxVideo);
@@ -120,7 +110,7 @@ giftButton.addEventListener('click', () => {
 
     if (now >= unlockTime) {
         giftMessage.innerHTML = `
-              <p><strong>My Dearest Meghu,</strong></p>
+             <p><strong>My Dearest Meghu,</strong></p>
             <p>Happy Birthday, my love! Today, the world was blessed with you, and I am beyond grateful. Thank you for waiting, for believing in us, and for making every moment we’ve shared unforgettable. You are the light in my life, the reason behind my happiness, and the warmth in my heart.</p>
             <p>When I first saw you, you were just a normal girl to my eyes, but as you came closer, the real you—a loving, mature, and strong woman—shone through. I realized then that you were much more than I could have ever imagined. Your kindness and grace continue to amaze me every day.</p>
             <p>I still remember those beautiful days, how I made kites for you, how we played the frog game, running around like kids, and our endless hide and seek. Those moments, so simple yet precious, are etched in my heart forever. And then, just when I thought life had moved on, you came back into my world like a missing piece finally returning home.</p>
@@ -366,3 +356,84 @@ musicSearchButton.addEventListener('click', async () => {
         musicResults.classList.remove("hidden");
     }
 });
+
+// New video functionality
+const videoLinks = [
+    "https://files.catbox.moe/wheydk.mp4",
+    "https://files.catbox.moe/drl8hz.mp4",
+    "https://files.catbox.moe/ridhno.mp4",
+    "https://files.catbox.moe/ww4tmk.mp4"
+];
+
+let currentVideoIndex = 0;
+const videoPlayer = document.getElementById('videoPlayer');
+const nextVideoButton = document.getElementById('nextVideoButton');
+const prevVideoButton = document.getElementById('prevVideoButton');
+
+videoPlayer.addEventListener('ended', playNextVideo);
+nextVideoButton.addEventListener('click', playNextVideo);
+prevVideoButton.addEventListener('click', playPreviousVideo);
+
+function playNextVideo() {
+    currentVideoIndex++;
+    if (currentVideoIndex < videoLinks.length) {
+        fadeOut(videoPlayer, () => {
+            videoPlayer.src = videoLinks[currentVideoIndex];
+            fadeIn(videoPlayer);
+            videoPlayer.play();
+        });
+    } else {
+        currentVideoIndex = 0;
+        fadeOut(videoPlayer, () => {
+            videoPlayer.src = videoLinks[currentVideoIndex];
+            fadeIn(videoPlayer);
+            videoPlayer.play();
+        });
+    }
+}
+
+function playPreviousVideo() {
+    currentVideoIndex--;
+    if (currentVideoIndex >= 0) {
+        fadeOut(videoPlayer, () => {
+            videoPlayer.src = videoLinks[currentVideoIndex];
+            fadeIn(videoPlayer);
+            videoPlayer.play();
+        });
+    } else {
+        currentVideoIndex = videoLinks.length - 1;
+        fadeOut(videoPlayer, () => {
+            videoPlayer.src = videoLinks[currentVideoIndex];
+            fadeIn(videoPlayer);
+            videoPlayer.play();
+        });
+    }
+}
+
+function fadeOut(element, callback) {
+    let opacity = 1;
+    const fade = setInterval(() => {
+        if (opacity <= 0) {
+            clearInterval(fade);
+            element.style.display = 'none';
+            callback();
+        } else {
+            opacity -= 0.1;
+            element.style.opacity = opacity;
+        }
+    }, 50);
+}
+
+function fadeIn(element) {
+    let opacity = 0;
+    element.style.opacity = opacity;
+    element.style.display = 'block';
+    const fade = setInterval(() => {
+        if (opacity >= 1) {
+            clearInterval(fade);
+        } else {
+            opacity += 0.1;
+            element.style.opacity = opacity;
+        }
+    }, 50);
+}
